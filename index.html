@@ -2,14 +2,13 @@
 <html lang="id">
 <head>
   <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18237779851"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'AW-18237779851');
-</script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18237779851"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-18237779851');
+  </script>
   <meta name="google-site-verification" content="4ng_z9i2o7PKQ_fY41DGdfve-jTKr-Nl9b7LwVcNNoA" />
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -19,10 +18,10 @@
 
   <!-- SEO -->
   <meta name="description" content="Berix Coffee adalah kopi lokal NTB premium dengan aroma kuat dan rasa berkarakter. Pesan langsung via WhatsApp." />
-  <meta name="keywords" content="Berix Coffee, kopi NTB, kopi Lombok, kopi lokal Indonesia, kopi premium" />
+  <meta name="keywords" content="Berix Coffee, kopi NTB, kopi Lombok, coffee tour Lombok, KLU coffee farm, Agritourism Lombok" />
   <meta name="author" content="Berix Coffee" />
 
-  <!-- 🔥 SITE NAME (BIAR GANTI DARI GITHUB) -->
+  <!-- SITE NAME -->
   <meta property="og:site_name" content="Berix Coffee">
 
   <!-- OPEN GRAPH -->
@@ -38,7 +37,7 @@
   <meta name="twitter:description" content="Kopi lokal NTB premium">
   <meta name="twitter:image" content="https://berixcoffee.github.io/assets/images/logo.png">
 
-  <!-- 🔥 TAMBAHAN BRAND SIGNAL -->
+  <!-- BRAND SIGNAL -->
   <meta name="application-name" content="Berix Coffee">
   <meta name="apple-mobile-web-app-title" content="Berix Coffee">
 
@@ -51,7 +50,7 @@
   <!-- FAVICON -->
   <link rel="icon" href="assets/images/logo.png" />
 
-  <!-- 🔥 STRUCTURED DATA (UPGRADE) -->
+  <!-- STRUCTURED DATA -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -71,6 +70,217 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" />
   <link rel="stylesheet" href="assets/css/style.css" />
+
+  <!-- STYLE POPUP & LANGUAGE SWITCHER -->
+  <style>
+    /* Tombol Ganti Bahasa di Navbar */
+    .lang-switcher-btn {
+      font-weight: 700;
+      font-size: 0.85rem;
+      border-radius: 20px;
+      padding: 4px 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.2s ease;
+    }
+
+    /* Modal Promo Overlay */
+    .promo-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.72);
+      backdrop-filter: blur(5px);
+      z-index: 10500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 15px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .promo-overlay.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .promo-card {
+      position: relative;
+      width: 100%;
+      max-width: 440px;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      background: #ffffff;
+      border-radius: 26px;
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.45);
+      overflow: visible;
+      transform: scale(0.85);
+      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .promo-overlay.show .promo-card {
+      transform: scale(1);
+    }
+
+    /* Tombol Close Melayang Bulat */
+    .promo-close-btn {
+      position: absolute;
+      top: -14px;
+      right: -10px;
+      width: 38px;
+      height: 38px;
+      background: #ffffff;
+      border: 2px solid #e2e8f0;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.15rem;
+      color: #333333;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+      z-index: 30;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .promo-close-btn:hover {
+      background: #f1f5f9;
+      transform: scale(1.1);
+    }
+
+    /* Header Banner Kartu */
+    .promo-header {
+      background: linear-gradient(135deg, #3d2314 0%, #633318 60%, #1e3a10 100%);
+      color: #ffffff;
+      padding: 22px 20px 16px;
+      border-top-left-radius: 26px;
+      border-top-right-radius: 26px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    .promo-badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.22);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      padding: 4px 14px;
+      border-radius: 20px;
+      font-size: 0.74rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    /* Area Konten Scrollable */
+    .promo-body {
+      padding: 16px 18px 20px;
+      background: #fffdfb;
+      border-bottom-left-radius: 26px;
+      border-bottom-right-radius: 26px;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .promo-body::-webkit-scrollbar {
+      width: 5px;
+    }
+    .promo-body::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 10px;
+    }
+
+    /* Card Item Paket */
+    .package-item {
+      background: #ffffff;
+      border: 1px solid #e9ecef;
+      border-radius: 14px;
+      padding: 11px 13px;
+      margin-bottom: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .package-item.highlight {
+      border: 1.5px solid #b45309;
+      background: #fffbeb;
+      box-shadow: 0 2px 8px rgba(180, 83, 9, 0.12);
+    }
+
+    .package-title {
+      font-weight: 700;
+      font-size: 0.88rem;
+      color: #1e293b;
+      margin-bottom: 2px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .package-desc {
+      font-size: 0.74rem;
+      color: #64748b;
+      margin: 0;
+      line-height: 1.35;
+    }
+
+    .package-price {
+      font-weight: 800;
+      font-size: 0.92rem;
+      color: #78350f;
+      white-space: nowrap;
+      text-align: right;
+    }
+
+    .package-price span {
+      display: block;
+      font-size: 0.65rem;
+      color: #64748b;
+      font-weight: normal;
+    }
+
+    .promo-highlight-bar {
+      background: #fef3c7;
+      border: 1px dashed #d97706;
+      border-radius: 12px;
+      padding: 8px 10px;
+      text-align: center;
+      font-size: 0.76rem;
+      color: #92400e;
+      font-weight: 600;
+      margin: 12px 0 14px;
+    }
+
+    .btn-booking {
+      background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 0.95rem;
+      border-radius: 50px;
+      padding: 12px;
+      border: none;
+      display: block;
+      text-align: center;
+      text-decoration: none;
+      box-shadow: 0 4px 15px rgba(22, 163, 74, 0.35);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn-booking:hover {
+      color: #ffffff;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(22, 163, 74, 0.45);
+    }
+  </style>
 </head>
 
 <body>
@@ -89,11 +299,17 @@
 
     <div class="collapse navbar-collapse" id="navbarMenu">
       <ul class="navbar-nav ms-auto align-items-center gap-lg-3 text-center">
-        <li class="nav-item"><a class="nav-link active" href="#hero">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="about.html">Tentang</a></li>
-        <li class="nav-item"><a class="nav-link" href="etalase.html">Produk</a></li>
+        <li class="nav-item"><a class="nav-link active" href="#hero" data-i18n="nav_home">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html" data-i18n="nav_about">Tentang</a></li>
+        <li class="nav-item"><a class="nav-link" href="etalase.html" data-i18n="nav_products">Produk</a></li>
         <li class="nav-item">
-          <a class="btn btn-danger" href="https://wa.me/6285158602227" target="_blank">💬 WhatsApp</a>
+          <a class="btn btn-danger nav-wa-btn" href="https://wa.me/6285158602227" target="_blank">💬 WhatsApp</a>
+        </li>
+        <!-- TOMBOL GANTI BAHASA (ID / EN) -->
+        <li class="nav-item">
+          <button id="langToggleBtn" class="btn btn-outline-secondary btn-sm lang-switcher-btn" onclick="toggleLanguage()">
+            🌐 <span id="currentLangLabel">EN</span>
+          </button>
         </li>
         <li class="nav-item">
           <button id="darkToggle" class="btn btn-outline-dark btn-sm">
@@ -112,10 +328,9 @@
   </video>
 
   <div class="container hero-content">
-    <!-- 🔥 BRAND DIPERJELAS -->
-    <h1 class="fw-bold display-5">Berix Coffee X Kopi Leong</h1>
-    <p class="lead">Kopi Lokal NTB Premium • Aroma Kuat • Rasa Berkarakter</p>
-    <a href="etalase.html" class="btn btn-danger btn-lg mt-3">Lihat Produk</a>
+    <h1 class="fw-bold display-5" data-i18n="hero_title">Berix Coffee X Kopi Leong</h1>
+    <p class="lead" data-i18n="hero_subtitle">Kopi Lokal NTB Premium • Aroma Kuat • Rasa Berkarakter</p>
+    <a href="etalase.html" class="btn btn-danger btn-lg mt-3" data-i18n="hero_btn">Lihat Produk</a>
   </div>
 </section>
 
@@ -142,7 +357,7 @@
 
 <!-- SOCIAL -->
 <section class="py-5 bg-light text-center">
-  <h2 class="fw-bold mb-4">Follow Us</h2>
+  <h2 class="fw-bold mb-4" data-i18n="social_title">Follow Us</h2>
   <a href="https://www.facebook.com/kopileong.berik/" target="_blank"><i class="bi bi-facebook fs-2 mx-2"></i></a>
   <a href="https://www.instagram.com/kopiberik.leong/" target="_blank"><i class="bi bi-instagram fs-2 mx-2"></i></a>
   <a href="https://www.tiktok.com/@kopi.leong" target="_blank"><i class="bi bi-tiktok fs-2 mx-2"></i></a>
@@ -153,11 +368,11 @@
   <div class="container">
     <div class="row g-4 align-items-center">
       <div class="col-md-6">
-        <h2 class="fw-bold">Contact Us</h2>
-        <p>📍 Dusun Batu Pande, Leong Tengah, KLU, NTB</p>
+        <h2 class="fw-bold" data-i18n="contact_title">Hubungi Kami</h2>
+        <p data-i18n="contact_address">📍 Dusun Batu Pande, Leong Tengah, KLU, NTB</p>
         <p>📧 kopileong.berik@gmail.com</p>
         <p>📞 +62 851-5860-2227</p>
-        <a href="https://wa.me/6285158602227" class="btn btn-success" target="_blank">Chat WhatsApp</a>
+        <a id="contactWaBtn" href="https://wa.me/6285158602227" class="btn btn-success" target="_blank" data-i18n="contact_btn">Chat WhatsApp</a>
       </div>
       <div class="col-md-6">
         <div class="ratio ratio-4x3">
@@ -174,11 +389,249 @@
 </footer>
 
 <!-- FLOATING WA -->
-<a href="https://wa.me/6285158602227" class="wa-float" target="_blank">💬</a>
+<a id="floatingWaBtn" href="https://wa.me/6285158602227" class="wa-float" target="_blank">💬</a>
 
-<!-- JS -->
+<!-- ==============================================
+     POPUP PROMOSI COFFEE FARM TOUR (BILINGUAL)
+=============================================== -->
+<div id="promoModal" class="promo-overlay">
+  <div class="promo-card">
+    <!-- Tombol Close Melayang Bulat -->
+    <button type="button" class="promo-close-btn" onclick="closePromoModal()" aria-label="Close">
+      <i class="bi bi-x-lg"></i>
+    </button>
+
+    <!-- Header Popup -->
+    <div class="promo-header">
+      <h3 class="fw-bold mb-1" style="font-size: 1.35rem;" data-i18n="promo_title">Fun Farm Experience</h3>
+      <p class="mb-0" style="font-size: 0.8rem; opacity: 0.92;" data-i18n="promo_subtitle">Jelajahi Kebun Kopi KLU • Workshop Sangrai • Alam Asri</p>
+    </div>
+
+    <!-- Body / List Paket Kopi -->
+    <div class="promo-body">
+      
+      <!-- 1. Coffee Discovery Tour (200K) -->
+      <div class="package-item">
+        <div>
+          <div class="package-title" data-i18n="pkg1_title">🌱 Coffee Discovery Tour</div>
+          <p class="package-desc" data-i18n="pkg1_desc">Tour kebun kopi & vanili di dataran tinggi, petik biji kopi segar & icip madu Trigona murni.</p>
+        </div>
+        <div class="package-price">
+          IDR 200K
+          <span data-i18n="unit_person">/ orang</span>
+        </div>
+      </div>
+
+      <!-- 2. Artisan Roasting & Brewing (750K) -->
+      <div class="package-item">
+        <div>
+          <div class="package-title" data-i18n="pkg2_title">☕ Artisan Roasting & Brewing</div>
+          <p class="package-desc" data-i18n="pkg2_desc">Fasilitas Discovery Tour + sangrai gerabah tradisional, kelas seduh barista & cupping kopi.</p>
+        </div>
+        <div class="package-price">
+          IDR 750K
+          <span data-i18n="unit_person">/ orang</span>
+        </div>
+      </div>
+
+      <!-- 3. Full Day Coffee & Waterfall Adventure (1.5M - Terfavorit) -->
+      <div class="package-item highlight">
+        <div>
+          <div class="package-title">
+            <span data-i18n="pkg3_title">⭐ Petualangan Kopi & Air Terjun</span>
+            <span class="badge bg-warning text-dark ms-1" style="font-size: 0.62rem;" data-i18n="pkg3_badge">Terfavorit</span>
+          </div>
+          <p class="package-desc" data-i18n="pkg3_desc">Kelas sangrai lengkap, trip ke air terjun alami, makan siang khas Lombok & adopsi pohon kopi.</p>
+        </div>
+        <div class="package-price">
+          IDR 1.5M
+          <span data-i18n="unit_person">/ orang</span>
+        </div>
+      </div>
+
+      <!-- 4. Overnight Coffee & Forest Immersion (3M) -->
+      <div class="package-item">
+        <div>
+          <div class="package-title" data-i18n="pkg4_title">🏕️ Menginap & Eksplorasi Hutan (2H1M)</div>
+          <p class="package-desc" data-i18n="pkg4_desc">Menginap tenang di alam Lombok, foraging hutan liar, hidangan tradisional (1 sarapan, 2 makan siang, 1 makan malam) & masterclass.</p>
+        </div>
+        <div class="package-price">
+          IDR 3.0M
+          <span data-i18n="unit_person">/ orang</span>
+        </div>
+      </div>
+
+      <!-- Tombol Booking ke WhatsApp -->
+      <a id="modalBookingBtn" href="https://wa.me/6285158602227" target="_blank" class="btn-booking">
+        <i class="bi bi-whatsapp me-2"></i> <span data-i18n="promo_btn">BOOKING TOUR VIA WHATSAPP</span>
+      </a>
+      <p class="text-center text-muted mt-2 mb-0" style="font-size: 0.72rem;" data-i18n="promo_note">
+        *Reservasi minimal 24 jam sebelumnya untuk persiapan tour kebun
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- JS BOOTSTRAP -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="assets/js/darkmode.js"></script>
+
+<!-- ==============================================================
+     SISTEM OTOMATIS BILINGUAL (BAHASA INDONESIA & ENGLISH)
+=============================================================== -->
+<script>
+  // Kamus Terjemahan
+  const i18nData = {
+    id: {
+      nav_home: "Home",
+      nav_about: "Tentang",
+      nav_products: "Produk",
+      hero_title: "Berix Coffee X Kopi Leong",
+      hero_subtitle: "Kopi Lokal NTB Premium • Aroma Kuat • Rasa Berkarakter",
+      hero_btn: "Lihat Produk",
+      social_title: "Follow Us",
+      contact_title: "Hubungi Kami",
+      contact_address: "📍 Dusun Batu Pande, Leong Tengah, KLU, NTB",
+      contact_btn: "Chat WhatsApp",
+      promo_badge: "☕ AGROWISATA KOPI LOMBOK",
+      promo_title: "Berix Fun Farm Experience",
+      promo_subtitle: "Jelajahi Kebun Kopi KLU • Workshop Sangrai • Alam Asri",
+      pkg1_title: "🌱 Coffee Discovery Tour",
+      pkg1_desc: "Tour kebun kopi & vanili di dataran tinggi, petik biji kopi segar & icip madu Trigona murni.",
+      pkg2_title: "☕ Artisan Roasting & Brewing",
+      pkg2_desc: "Fasilitas Discovery Tour + sangrai gerabah tradisional, kelas seduh barista & cupping kopi.",
+      pkg3_title: "⭐ Petualangan Kopi & Air Terjun",
+      pkg3_badge: "Terfavorit",
+      pkg3_desc: "Kelas sangrai lengkap, trip ke air terjun alami, makan siang khas Lombok & adopsi pohon kopi.",
+      pkg4_title: "🏕️ Menginap & Eksplorasi Hutan (2H1M)",
+      pkg4_desc: "Menginap tenang di alam Lombok, foraging hutan liar, hidangan tradisional (1 sarapan, 2 makan siang, 1 makan malam) & masterclass.",
+      unit_person: "/ orang",
+      promo_ribbon: "🌱 <em>Adopsi Pohon Kopi: Dapatkan foto berkala perkembangan pohon kopi Anda setiap 3 bulan!</em>",
+      promo_btn: "BOOKING TOUR VIA WHATSAPP",
+      promo_note: "*Reservasi minimal 24 jam sebelumnya untuk persiapan tour kebun",
+      wa_booking_text: "Halo Admin Berix Coffee, saya tertarik untuk booking Paket Tur Kebun Kopi. Boleh minta info jadwal dan detailnya?",
+      wa_contact_text: "Halo Admin Berix Coffee, saya ingin bertanya seputar produk dan kunjungan kebun."
+    },
+    en: {
+      nav_home: "Home",
+      nav_about: "About",
+      nav_products: "Products",
+      hero_title: "Berix Coffee X Kopi Leong",
+      hero_subtitle: "Premium Local Lombok Coffee • Bold Aroma • Distinct Character",
+      hero_btn: "View Products",
+      social_title: "Follow Us",
+      contact_title: "Contact Us",
+      contact_address: "📍 Batu Pande Village, Central Leong, North Lombok (KLU), NTB",
+      contact_btn: "Chat WhatsApp",
+      promo_title: "Berix Fun Farm Experience",
+      promo_subtitle: "Highland Coffee Walk • Roasting Workshop • Nature",
+      pkg1_title: "🌱 Coffee Discovery Tour",
+      pkg1_desc: "Highland plantation walk, coffee cherry picking & fresh Trigona farm honey tasting.",
+      pkg2_title: "☕ Artisan Roasting & Brewing",
+      pkg2_desc: "Discovery Tour + traditional clay-pot roasting, barista brewing class & guided cupping.",
+      pkg3_title: "⭐ Coffee & Waterfall Adventure",
+      pkg3_badge: "Best Value",
+      pkg3_desc: "Full roasting class, scenic natural waterfall trek, authentic Lombok lunch & coffee tree adoption.",
+      pkg4_title: "🏕️ Overnight Forest Immersion (2D1N)",
+      pkg4_desc: "Peaceful stay in Lombok nature, wild forest foraging, authentic meals (1B, 2L, 1D) & masterclass.",
+      unit_person: "/ person",
+      promo_btn: "BOOK TOUR VIA WHATSAPP",
+      promo_note: "*Advance reservation required (min. 24 hours prior) for tour preparations",
+      wa_booking_text: "Hello Berix Coffee, I am interested in booking the Coffee Farm Experience Package. Could you please share the details and available dates?",
+      wa_contact_text: "Hello Berix Coffee, I would like to inquire about your coffee products and farm visit."
+    }
+  };
+
+  let currentLang = 'id';
+
+  // Deteksi Otomatis Bahasa Browser Pengunjung
+  function detectPreferredLanguage() {
+    const saved = localStorage.getItem('berix_lang');
+    if (saved && (saved === 'id' || saved === 'en')) {
+      return saved;
+    }
+    // Jika belum pernah memilih, cek bahasa bawaan browser pengguna
+    const browserLang = (navigator.language || navigator.userLanguage || 'id').toLowerCase();
+    if (browserLang.startsWith('id')) {
+      return 'id';
+    }
+    // Untuk selain Indonesia (Inggris, Eropa, dll.) arahkan ke English
+    return 'en';
+  }
+
+  // Terapkan Bahasa ke Seluruh Halaman
+  function applyLanguage(lang) {
+    currentLang = lang;
+    localStorage.setItem('berix_lang', lang);
+
+    // Update label tombol switch (menampilkan bahasa lawan yang bisa diklik)
+    const label = document.getElementById('currentLangLabel');
+    if (label) {
+      label.innerText = (lang === 'id') ? 'EN' : 'ID';
+    }
+
+    // Ubah teks semua elemen yang memiliki atribut data-i18n
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (i18nData[lang] && i18nData[lang][key]) {
+        el.innerHTML = i18nData[lang][key];
+      }
+    });
+
+    // Perbarui link WhatsApp dengan teks yang sesuai bahasa aktif
+    const bookingBtn = document.getElementById('modalBookingBtn');
+    if (bookingBtn) {
+      const msg = encodeURIComponent(i18nData[lang].wa_booking_text);
+      bookingBtn.href = `https://wa.me/6285158602227?text=${msg}`;
+    }
+
+    const contactBtn = document.getElementById('contactWaBtn');
+    if (contactBtn) {
+      const msg = encodeURIComponent(i18nData[lang].wa_contact_text);
+      contactBtn.href = `https://wa.me/6285158602227?text=${msg}`;
+    }
+
+    const floatingBtn = document.getElementById('floatingWaBtn');
+    if (floatingBtn) {
+      const msg = encodeURIComponent(i18nData[lang].wa_contact_text);
+      floatingBtn.href = `https://wa.me/6285158602227?text=${msg}`;
+    }
+  }
+
+  // Fungsi Toggle Saat Tombol 🌐 Diklik
+  function toggleLanguage() {
+    const nextLang = (currentLang === 'id') ? 'en' : 'id';
+    applyLanguage(nextLang);
+  }
+
+  // Inisialisasi Saat Halaman Dimuat
+  window.addEventListener('DOMContentLoaded', () => {
+    const initialLang = detectPreferredLanguage();
+    applyLanguage(initialLang);
+
+    // Tampilkan Popup Promosi 1 detik setelah halaman dibuka
+    setTimeout(showPromoModal, 1000);
+  });
+
+  // Fungsi Kontrol Modal Popup
+  function showPromoModal() {
+    const modal = document.getElementById('promoModal');
+    if (modal) modal.classList.add('show');
+  }
+
+  function closePromoModal() {
+    const modal = document.getElementById('promoModal');
+    if (modal) modal.classList.remove('show');
+  }
+
+  document.getElementById('promoModal').addEventListener('click', function(e) {
+    if (e.target === this) closePromoModal();
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closePromoModal();
+  });
+</script>
 
 </body>
 </html>
